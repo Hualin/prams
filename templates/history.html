@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Histroy{% endblock %}
+{% block body %}
+  <h2>Histroy</h2>
+  {% if error %}<div class=error><strong>Error:</strong> {{ error }}</div>{% endif %}
+  <p>Greeting, You are the {{ occupationTitle[g.user.occupation] }} of this system.</p>
+  <p> Here are the histroy of edited forms:</p>
+  <table class=HList>
+    <tr>
+      <th>User ID</th>
+      <th>Edited by</th>
+      <th>Estabalishment ID</th>
+      <th>Edited Time</th>
+      <th>Stage</th>
+      <th>Action</th>
+      <th>Occupation</th>
+    </tr>
+    {% for section in sections %}
+      <tr>
+        {% for dd in section %}
+          <td>{{ dd }}</td>        
+        {% endfor %}
+      </tr>
+    {% else %}
+     <p><em>There's no staff edited any forms yet.</em>
+    {% endfor %}
+  </table>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  {% if g.user %}
+    Home &mdash; {{ g.user.user_name }}
+  {% else %}
+    Home
+  {% endif %}
+{% endblock %}
+
+{% block body %}
+  <h2>{{ self.title() }}</h2>
+  {% if g.user %}
+    <p>Welcome, {{ g.user.user_name }}</p>
+    <p>You are the {{ occupationTitle[g.user.occupation] }} of this system.</p>
+  {% endif %}
+    <p>Welcome, please login.</p>
+{% endblock %}

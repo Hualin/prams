@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block title %} Subject Information {% endblock %}
+{% block body %}
+	<h2>Subject Information</h2>
+	{% if error %}<div class=error><strong>Error:</strong> {{ error }}</div>{% endif %}
+
+<div class=basic-info>
+	<h3>Basic Information</h3>
+	<li>Establishment ID: {{ subject_info.subject_id }}</li>
+	<li>Department/ School: {{ subject_info.department }}</li>
+	<li>Post Title: {{ subject_info.title }}</li>
+	<li>Post Holder: {{ subject_info.holder }}</li>
+	<li>Is this a new application: {{ subject_info.title }}</li>
+	<li>Subject Status: {{ subject_info.subject_status }}</li>
+</div>
+
+<div class=formA-info>
+	<h3>Form A Information</h3>
+	<table class=block-status>
+		<tr class=block-status-head>
+			<th>Activated</th>
+			<th>Section</th>
+			<th>Block</th>
+			<th>Responsibility</th>
+			<th>Action</th>
+			<th>Status</th>
+		</tr>
+		{% for block_info in table_formA %}
+		<tr>
+			<td>{{ block_info[0] }}</td>
+			<td>{{ block_info[1] }}</td>
+			<td>{{ block_info[2] }}</td>
+			<td>{{ block_info[3] }}</td>
+			<td><a href="/all_subjects/{{ subject_info.subject_id }}/{{ block_info[2] }}/{{  block_info[4][0] }}">{{ block_info[4][0] }}</a></td>
+			{% if block_info[4][1] != 'None' %}
+				<td><a href="/all_subjects/{{ subject_info.subject_id }}/{{ block_info[2] }}/{{  block_info[4][1] }}">{{ block_info[4][1] }}</a></td>
+			{% endif %}
+			<td>{{ block_info[5] }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+
+{% if g.user.occupation == 'HOD' or g.user.occupation == 'ADM' %}
+    <form action="{{ url_for('delete_subject', subject_id = subject_info.subject_id) }}" method=post>
+      <input type=submit value="delete this subject">
+    </form>
+ {% endif%}
+
+ {% if extra_action %}
+ 	{% if sm.check(extra_action, g.user.occupation, 'allocate'): %}
+ 		<form action="{{ url_for('allocate_establishment_reference_number', subject_id = subject_info.subject_id) }}" method=post>
+ 		  <p>Conform for allocating the Establishment Reference Number and proceed.</p>
+	      <input type=submit value="proceed">
+	    </form>
+	{% elif sm.check(extra_action, g.user.occupation, 'review'): %}
+		<form action="{{ url_for('review_subject', subject_id = subject_info.subject_id) }}" method=post>
+		  <p>Conform for finishing reviewing the subject and proceed.</p>
+	      <input type=submit value="proceed">
+	    </form>
+	{% elif sm.check(extra_action, g.user.occupation, 'seal') and not done_before:%}
+		<form action="{{ url_for('seal_subject', subject_id = subject_info.subject_id) }}" method=post>
+		  <p>Conform for checking the subject and seal it</p>	
+	      <input type=submit value="seal">
+	    </form>
+	{% endif %}
+
+ {% endif %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}All Subjects{% endblock %}
+{% block body %}
+  <h2>All Staff Information</h2>
+  {% if error %}<div class=error><strong>Error:</strong> {{ error }}</div>{% endif %}
+
+  <table class=stafflist>
+    <tr>
+      <th>User Name</th>
+      <th>User ID</th>
+      <th>Occupation</th>
+      <th>Email</th>
+    </tr>
+    {% for staff in staff_dict %}
+      <tr>
+        {% for dd in staff %}
+          <td>{{ dd }}</td>        
+        {% endfor %}
+      </tr>
+    {% else %}
+     <p><em>There's no staff really so far. wait, how can you see this message?</em>
+    {% endfor %}
+  </table>
+
+{% endblock %}

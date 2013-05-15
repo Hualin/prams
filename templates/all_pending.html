@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}Pending Jobs{% endblock %}
+{% block body %}
+  <h2>Pending Jobs</h2>
+  {% if error %}<div class=error><strong>Error:</strong> {{ error }}</div>{% endif %}
+  <p>Greeting, You are the {{ occupationTitle[g.user.occupation] }} of this system.</p>
+  <p> Current pending jobs for you are:</p>
+  <table class=JobList>
+    <tr>
+      <th>Estabalishment ID</th>
+      <th>Initial Time</th>
+      <th>Stage</th>
+      <th>from</th>
+      <th>Pending Status</th>
+    </tr>
+    {% for job in jobs %}
+      <tr>
+        {% for dd in job %}
+          <td><a href="{{ url_for('subject', subject_id = job[0]) }}">{{ dd }}</a></td>        
+        {% endfor %}
+      </tr>
+    {% else %}
+     <p><em>There's no job so far.</em>
+    {% endfor %}
+  </table>
+
+{% endblock %}

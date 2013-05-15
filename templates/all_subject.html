@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}All Subjects{% endblock %}
+{% block body %}
+  <h2>All Subjects</h2>
+  {% if error %}<div class=error><strong>Error:</strong> {{ error }}</div>{% endif %}
+
+  {% if g.user.occupation == 'HOD' or g.user.occupation == 'ADM' %}
+    <form action="{{ url_for('add_subject') }}" method=post>
+      <input type=submit value="add new subject">
+    </form>
+  {% endif%}
+  <table class=subjectList>
+    <tr>
+      <th>Estabalishment ID</th>
+      <th>Application Status</th>
+      <th>Created Time</th>
+      <th>Holder's Name</th>
+    </tr>
+    {% for subject in subjects %}
+      <tr>
+        {% for dd in subject %}
+          <td><a href="{{ url_for('subject', subject_id = subject[0]) }}">{{ dd }}</a></td>        
+        {% endfor %}
+      </tr>
+    {% else %}
+     <p><em>There's no subject so far.</em>
+    {% endfor %}
+  </table>
+
+{% endblock %}

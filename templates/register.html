@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Sign Up{% endblock %}
+{% block body %}
+  <h2>Sign Up</h2>
+  {% if error %}<div class=error><strong>Error:</strong> {{ error }}</div>{% endif %}
+
+  <form action="" method=post>
+    <dl>
+      <dt>Username:
+      <dd><input type=text name=user_name size=30 value="{{ request.form.user_name }}">
+      <dt>Occupation:
+      <dd>
+        <select name="occupation">
+        <option value="HOD">Head of Department</option>
+        <option value="HR">Human Resources Manager</option>
+        <option value="MA">Management Account</option>
+        <option value="DP">Deputy Principal</option>
+        <option value="DO">Director of operations and Registrar Faculty Dean</option>
+        <option value="ADM">Administrator</option>
+        </select>
+      <dt>Password:
+      <dd><input type=password name=password size=30>
+      <dt>Password <small>(please type it again)</small>:
+      <dd><input type=password name=password2 size=30>
+      <dt>E-mail:
+      <dd><input type=text name=e-mail size=256>
+    </dl>
+    <div class=actions><input type=submit value="Sign Up"></div>
+  </form>
+{% endblock %}

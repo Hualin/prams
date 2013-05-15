@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<title>{% block title %}Welcome{% endblock %} | PRAMS</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<div class=page>
+	<h1> Post Requests and Approval Management System </h1>
+	<div class=navigation>
+		{% if g.user %}
+			<a href="{{ url_for('home') }}"> HOME </a> |
+			<a href="{{ url_for('all_subjects')}}"> SUBJECT </a> |
+			<a href="{{ url_for('history')}}"> HISTORY </a> |
+			<a href="{{ url_for('all_pendings')}}"> PENDING JOBS </a> |
+			<a href="{{ url_for('all_staff')}}"> STAFF BOOK</a> |
+			<a href="{{ url_for('logout')}}"> SIGN OUT  </a>
+		{% else %}
+			<a href="{{ url_for('home')}}"> HOME </a> |
+			<a href="{{ url_for('register')}}"> SIGN UP </a> |
+			<a href="{{ url_for('login')}}"> SIGN IN </a> 
+		{% endif %}
+	</div>
+	{% with flashes = get_flashed_messages() %}
+    {% if flashes %}
+      <ul class=flashes>
+      {% for message in flashes %}
+        <li>{{ message }}
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <div class=body>
+  {% block body %}{% endblock %}
+  </div>
+  <div class=footer>
+    PRAMS &mdash; A Flask Application developed by Siyu
+  </div>
+</div>

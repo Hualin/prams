@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block title %} Subject Information {% endblock %}
+{% block body %}
+	<h2>Subject Information</h2>
+	{% if error %}<div class=error><strong>Error:</strong> {{ error }}</div>{% endif %}
+
+<div class="form_block" id="{{ block_name }}">
+	<form method=post>
+			<dl>
+				{% for ff in block_info %}
+				<dt>{{ title_map[ff[0]][0] }}</dt>
+					{% if mode=='edit' %}
+						{% if title_map[ff[0]][1] == 'TEXT' %}
+							<input type=text name={{ff[0]}} value="{{ff[1]}}" id="{{block_name + "_"+ ff[0]}}">
+						{% elif title_map[ff[0]][1] == 'RADIO' %}
+							{% for itm in title_map[ff[0]][2] %}
+								{% if ff[1] == itm %}
+									<input type="radio" name={{ff[0]}} value="{{ itm }}" id="{{block_name + "_"+ ff[0]}}" CHECKED>{{ itm }}
+								{% else %}
+									<input type="radio" name={{ff[0]}} value="{{ itm }}" id="{{block_name + "_"+ ff[0]}}">{{ itm }}
+								{% endif %}
+							{% endfor %}
+						{% elif title_map[ff[0]][1] == 'DATE' %}
+							<input type="date" name={{ff[0]}} value="{{ff[1]}}" id="{{block_name + "_"+ ff[0]}}">
+						{% endif %}
+
+					{% else %}
+						{% if title_map[ff[0]][1] == 'TEXT' %}
+							<input type=text name={{ff[0]}} value="{{ff[1]}}" id="{{block_name + "_"+ ff[0]}}" readonly>
+						{% elif title_map[ff[0]][1] == 'DATE'%}
+							<input type="date" name={{ff[0]}} value="{{ff[1]}}" id="{{block_name + "_"+ ff[0]}}" readonly>
+						{% elif title_map[ff[0]][1] == 'RADIO' %}
+							{% for itm in title_map[ff[0]][2] %}
+								{% if ff[1] == itm %}
+									<input type="radio" name={{ff[0]}} value="{{ itm }}" id="{{block_name + "_"+ ff[0]}}" CHECKED readonly>{{ itm }}
+								{% else %}
+									<input type="radio" name={{ff[0]}} value="{{ itm }}" id="{{block_name + "_"+ ff[0]}}" readonly>{{ itm }}
+								{% endif %}
+							{% endfor %}
+						{% else %}
+							<input type=text name={{ff[0]}} value="{{ff[1]}}" id="{{block_name + "_"+ ff[0]}}" readonly>
+						{% endif %}
+					{% endif %}
+				{% endfor %}			
+			</dl>
+
+	<div class=control-area>
+		{% if mode == 'edit' %}
+			<input type=submit name=save value=save formaction="/all_subjects/{{subject_id}}/{{block_name}}/save">
+			<input type=submit name=submit value=submit formaction="/all_subjects/{{subject_id}}/{{block_name}}/submit">
+			<input type=submit name=discard value=discard formaction="/all_subjects/{{subject_id}}/exit">
+		{% elif mode == 'view' %}
+			<p>You can't edit anything now.</p>
+			<input type=submit name=back value=back formaction="/all_subjects/{{subject_id}}/exit">
+		{% else %}
+		{% endif %}
+	</div>
+	</form>
+</div>
+
+{% endblock %}
