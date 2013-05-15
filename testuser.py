@@ -19,10 +19,9 @@ from werkzeug import check_password_hash, generate_password_hash
 
 for tu in test_users:
 	newUsr = User(	tu[0],
-					tu[2],
-					generate_password_hash(tu[1]),
-					tu[3]
-				)
+			tu[2],
+			generate_password_hash(tu[1]),
+			tu[3])
 	db.session.add(newUsr)
 	db.session.commit()
 
