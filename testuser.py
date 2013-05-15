@@ -1,4 +1,3 @@
-
 # for rebuilding the user data set again
 # first you should delete prams.db!!!
 from prams import db
@@ -13,7 +12,7 @@ test_users = [
 	['Judy', 'ddddd', 'MA', 'judy@gmail.com'],
 	['Echo', 'ddddd', 'DO', 'Echo@sina.com'],
 	['Popy', 'ddddd', 'DP', 'popy@hotmail.com'],
-	['Siyu', 'ddddd', 'ADM', 'siyujiang1030@hotmail.com'],
+	['Siyu', 'ddddd', 'ADM', 'siyu@outlook.com'],
 	]
 from model import User
 from werkzeug import check_password_hash, generate_password_hash
