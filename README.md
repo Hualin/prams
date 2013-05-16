@@ -22,8 +22,8 @@ PRAMS 的实现的大致业务是：用户提交一个工作申请单，然后�
 1. 安装 python27；
 2. 安装 flask 库；
 3. 安装 flask-sqlalchemy;
-4. 安装 sqlite3;
-5. 直接运行 testuser.py
+4. 安装 sqlite3，如果没有请下载该程序，放于 prams 目录下即可；
+5. 直接运行 testuser.py，此文件会建立一个新的数据库（如果之前没有的话）；
 6. 用 python 执行文件 prams.py;
 7. 在 chrome 中 输入 http://127.0.0.1:5000/
 8. There you go.
