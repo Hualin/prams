@@ -7,7 +7,7 @@ db.session.commit()
 
 # user_name, password, occupation
 test_users = [
-	['Jose', 'bacon', 'HOD', 'jose@cs.rhul.ac.uk'],
+	['Jose', 'bacon', 'HOD', 'jose@cs.xxxx.ac.uk'],
 	['Fang', 'ddddd', 'HR', 'fang@gmail.com'],
 	['Judy', 'ddddd', 'MA', 'judy@gmail.com'],
 	['Echo', 'ddddd', 'DO', 'Echo@sina.com'],
